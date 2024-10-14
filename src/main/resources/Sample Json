@@ -21,6 +21,7 @@
       "orderCode": 1001,
       "orderDetails": "Bought a laptop",
       "orderDate": "10/10/2024"
+      "customerId": "670cffa450302e42d2cf6b54"
     },
     {
       "orderCode": 1002,
