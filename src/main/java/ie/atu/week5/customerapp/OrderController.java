@@ -19,6 +19,7 @@ public class OrderController {
 
     @GetMapping
     public List<Order> getAllOrders() {
+
         return orderRepository.findAll();
     }
 
@@ -36,10 +37,7 @@ public class OrderController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOrder(@PathVariable String id) {
-        if (orderRepository.existsById(id)) {
-            orderRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+        orderRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
