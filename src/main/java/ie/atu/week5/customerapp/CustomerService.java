@@ -13,14 +13,16 @@ public class CustomerService {
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
-    public  Optional<Customer> getCustomerById(String id){
+    public  List<Customer> getCustomerById(String id) {
+        customerRepository.findById(id);
         //Logic to retrieve the customer from the repository
-        return customerRepository.findById(id);
+        return customerRepository.findAll();
     }
 
-    public Customer createCustomer(Customer customer) {
+    public List<Customer> createCustomer(Customer customer) {
+        customerRepository.save(customer);
         //Logic to save created customer to the repository
-        return customerRepository.save(customer);
+        return customerRepository.findAll();
 
     }
 
