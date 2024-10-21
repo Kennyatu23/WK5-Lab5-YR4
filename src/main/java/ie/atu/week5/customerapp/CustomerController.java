@@ -42,7 +42,7 @@ public class CustomerController {
     }
 
     @PutMapping("/updateProduct/{id}")
-    public ResponseEntity <List<Customer>> updateProduct(@PathVariable Long id, @RequestBody Customer updatedCustomer) {
+    public ResponseEntity <List<Customer>> updateProduct(@PathVariable String id, @RequestBody Customer updatedCustomer) {
 
         customerList = customerService.updateCustomer(id, updatedCustomer);
         return ResponseEntity.ok(customerList);
@@ -53,7 +53,7 @@ public class CustomerController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<List<Customer>> deleteCustomer(@PathVariable String id) {
-        customerList =customerService.deleteCustomer(id);
+        customerList = customerService.deleteCustomer(id);
         return ResponseEntity.ok(customerList);
     }
 }

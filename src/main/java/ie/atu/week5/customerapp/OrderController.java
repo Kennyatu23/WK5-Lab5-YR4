@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -12,8 +13,10 @@ import java.util.List;
 public class OrderController {
 
     private final OrderRepository orderRepository;
+    private List<Order> orderList = new ArrayList<>();
 
     public OrderController(OrderRepository orderRepository) {
+
         this.orderRepository = orderRepository;
     }
 
@@ -28,16 +31,16 @@ public class OrderController {
         List<Order> orders = orderRepository.findByCustomerId(customerId);
         return ResponseEntity.ok(orders);
     }
-
+/*
     @PostMapping
     public ResponseEntity<Order> createOrder(@Valid @RequestBody Order order) {
-        Order savedOrder = orderRepository.save(order);
-        return ResponseEntity.ok(savedOrder);
+       // orderList = OrderRepository.createOrder(order);
+      // return ResponseEntity.ok(orderList);
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable String id) {
-        orderRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+*/
+   // @DeleteMapping("/{id}")
+    public ResponseEntity <List<Order>>deleteOrder(@PathVariable String id) {
+       // orderList = orderRepository.deleteById(id);
+        return ResponseEntity.ok(orderList);
     }
 }

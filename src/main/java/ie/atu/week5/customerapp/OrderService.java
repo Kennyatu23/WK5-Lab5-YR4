@@ -10,18 +10,18 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public OrderService(OrderRepository orderRepository) {
-
         this.orderRepository = orderRepository;
     }
 
-    public Optional<Order> getOrdersByCustomerId(String id) {
-        //Logic to retrieve the order from the repository
-        return orderRepository.findById(id);
+    public List<Order> getOrdersByCustomersId(String id) {
+        orderRepository.findById(id);
+        return orderRepository.findAll();
     }
 
-    public Order createOrder(Order order) {
+    public List<Order> createOrder(Order order) {
         //Logic to save created order to the repository
-        return orderRepository.save(order);
+        orderRepository.save(order);
+        return orderRepository.findAll();
 
     }
 

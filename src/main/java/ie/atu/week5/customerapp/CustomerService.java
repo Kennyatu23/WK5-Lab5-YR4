@@ -26,28 +26,16 @@ public class CustomerService {
 
     }
 
-    public List<Customer> updateCustomer(Long id, Customer updatedCustomer) {
-        // Fetch the list of customers from the repository
-        List<Customer> customers = customerRepository.findAll();
+    public List<Customer> updateCustomer(String id, Customer customer) {
 
-        // Find the customer by  ID and update it
-        for (Customer existingCustomer : customers) {
-            if (existingCustomer.getId().equals(id)) {
-                // Update the existing customer fields
-                existingProduct.setProductName(updatedProduct.getProductName());
-                existingProduct.setProductDescription(updatedProduct.getProductDescription());
-                existingProduct.setProductPrice(updatedProduct.getProductPrice());
-                existingProduct.setProductCode(updatedProduct.getProductCode());
-                // break;  // Exit loop once the product is found and updated
+            if (customerRepository.existsById(id)) {
+                customer.setId(id);
+                customerRepository.save(customer);
             }
+            return customerRepository.findAll();
         }
 
-        // Save the updated product list back to the repository
-        customerRepository.saveAll(customers);
 
-        // Return the updated product list
-        return customers;
-    }
 
     public List<Customer> deleteCustomer(String id) {
         // Checking if customer exists by the id
