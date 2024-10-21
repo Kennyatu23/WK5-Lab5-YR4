@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,38 +14,37 @@ import java.util.Optional;
 public class CustomerController {
 
     private final CustomerRepository customerRepository;
+    private List<Customer> customerList = new ArrayList<>();
+    private CustomerService customerService;
 
-    public CustomerController(CustomerRepository customerRepository) {
 
+    public CustomerController(CustomerService customerService, CustomerRepository customerRepository) {
+        this.customerService = customerService;
         this.customerRepository = customerRepository;
     }
 
     @GetMapping
     public List<Customer> getAllCustomers() {
+
         return customerRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable String id) {
-        Optional<Customer> customer = customerRepository.findById(id); //service call
-
-        if (customer.isPresent()) {
-            return ResponseEntity.ok(customer.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<List<Customer>> getCustomerById(@PathVariable String id) {
+         customerList = customerService.getCustomerById(id); //service call
+        return ResponseEntity.ok(customerList);
     }
 
     @PostMapping
-    public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) {
-        Customer savedCustomer = customerRepository.save(customer);
-        return ResponseEntity.ok(savedCustomer);
+    public ResponseEntity<List<Customer>> createCustomer(@Valid @RequestBody Customer customer) {
+        customerList = customerService.createCustomer(customer);
+        return ResponseEntity.ok(customerList);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable String id) {
-        customerRepository.deleteById(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<List<Customer>> deleteCustomer(@PathVariable String id) {
+        customerList =customerService (d);
+        return ResponseEntity.ok(customerList);
     }
 }
 
