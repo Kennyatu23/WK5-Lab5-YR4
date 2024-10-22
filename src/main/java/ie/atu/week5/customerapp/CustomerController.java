@@ -31,7 +31,7 @@ public class  CustomerController {
 
     @GetMapping("/{id}")
     public ResponseEntity <Customer> getCustomerById(@PathVariable String id) {
-       //  Customer customer = customerService.getCustomerById(id);
+        Customer customer = customerService.getCustomerById(id);
         return ResponseEntity.ok(customer);
     }
 
