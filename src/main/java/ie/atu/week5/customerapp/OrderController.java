@@ -13,7 +13,9 @@ import java.util.List;
 public class OrderController {
 
     private final OrderRepository orderRepository;
+
     private List<Order> orderList = new ArrayList<>();
+    private OrderService orderService;
 
     public OrderController(OrderRepository orderRepository) {
 
@@ -27,20 +29,20 @@ public class OrderController {
     }
 
     @GetMapping("/customer/{customerId}")
-    public ResponseEntity<List<Order>> getOrdersByCustomerId(@PathVariable String customerId) {
+    public ResponseEntity <List<Order>> getOrdersByCustomerId(@PathVariable String customerId) {
         List<Order> orders = orderRepository.findByCustomerId(customerId);
         return ResponseEntity.ok(orders);
     }
-/*
+
     @PostMapping
-    public ResponseEntity<Order> createOrder(@Valid @RequestBody Order order) {
-       // orderList = OrderRepository.createOrder(order);
-      // return ResponseEntity.ok(orderList);
+    public ResponseEntity <List<Order>> createOrder(@Valid @RequestBody Order order) {
+        orderList = orderService.createOrder(order);
+       return ResponseEntity.ok(orderList);
     }
-*/
-   // @DeleteMapping("/{id}")
+
+   @DeleteMapping("/{id}")
     public ResponseEntity <List<Order>>deleteOrder(@PathVariable String id) {
-       // orderList = orderRepository.deleteById(id);
+        orderList = orderService.deleteOrder(id);
         return ResponseEntity.ok(orderList);
     }
 }

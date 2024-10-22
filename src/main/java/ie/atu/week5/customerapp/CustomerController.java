@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/customers")
-public class CustomerController {
+public class  CustomerController {
 
     private final CustomerRepository customerRepository;
     private List<Customer> customerList = new ArrayList<>();
@@ -30,9 +30,9 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Customer>> getCustomerById(@PathVariable String id) {
-         customerList = customerService.getCustomerById(id);
-        return ResponseEntity.ok(customerList);
+    public ResponseEntity <Customer> getCustomerById(@PathVariable String id) {
+       //  Customer customer = customerService.getCustomerById(id);
+        return ResponseEntity.ok(customer);
     }
 
     @PostMapping
